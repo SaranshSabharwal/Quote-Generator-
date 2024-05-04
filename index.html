@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quote of the day </title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="quote-box">
+    <h2>Quote of the day</h2>
+    <blockquote id="Quote"> Loading...</blockquote>
+    <span id="Author">Loading...</span>
+    <div>
+        <button class="New" onclick="getquote(api_url);">New Quote</button>
+        <button class="twitter" onclick="Tweet()"><img src="download.png" alt=""> Tweet</button>
+        <button class="Threads" onclick="Threads()"> <img src="Threads_(app).png" alt="">Threads</button>
+    </div>
+</div>
+<script>
+    const Quote=document.getElementById("Quote");
+    const Author=document.getElementById("Author");
+    const api_url = "";
+async function getquote(url){
+    const response = await fetch(url);
+    var data = await response.json();
+    console.log(data);
+    Quote.innerText=data.content;
+    Author.innerText=data.author;
+}
+
+getquote(api_url);
+function Tweet(){
+    window.open("https://twitter.com/intent/tweet?hashtags=quote&related=freecodecamp&text="+Quote.innerText+" - "+Author.innerText);
+}
+function Threads(){
+    window.open("https://www.threads.net/intent/post?text=https%3A%2F%2Fengineering.fb.com%2F2023%2F11%2F06%2Fandroid%2Fhow-meta-built-threads-in-5-months")
+}
+</script>
+</body>
+</html>
